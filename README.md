@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-open http://localhost:3000 and watch the base blockchain matrix unfold.
+open http://localhost:3000, watch a new global economy unfold, and get inspired to build and create
 
 ## how it works
 
