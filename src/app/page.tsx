@@ -61,8 +61,9 @@ export default function Home() {
         />
       ))}
       
-      {/* Pulsing Blue Base Square (solid, sharp corners, bigger) */}
+      {/* Pulsing Blue Base Square (solid, sharp corners, bigger, clickable) */}
       <div
+        onClick={() => window.open('https://base.org', '_blank')}
         style={{
           position: 'absolute',
           top: '50%',
@@ -70,10 +71,20 @@ export default function Home() {
           transform: 'translate(-50%, -50%)',
           width: '140px',
           height: '140px',
-          backgroundColor: '#0052ff',
+          backgroundColor: '#0033ff',
           zIndex: 100,
-          boxShadow: '0 0 40px rgba(0, 82, 255, 0.9)',
-          animation: 'pulse 2s ease-in-out infinite alternate'
+          boxShadow: '0 0 40px rgba(0, 51, 255, 0.9)',
+          animation: 'pulse 2s ease-in-out infinite alternate',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = '#0022ff';
+          e.currentTarget.style.boxShadow = '0 0 60px rgba(0, 34, 255, 1)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = '#0033ff';
+          e.currentTarget.style.boxShadow = '0 0 40px rgba(0, 51, 255, 0.9)';
         }}
       />
       
@@ -86,11 +97,11 @@ export default function Home() {
         
         @keyframes pulse {
           0% { 
-            box-shadow: 0 0 20px rgba(0, 82, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 51, 255, 0.6);
             transform: translate(-50%, -50%) scale(1);
           }
           100% { 
-            box-shadow: 0 0 40px rgba(0, 82, 255, 1);
+            box-shadow: 0 0 40px rgba(0, 51, 255, 1);
             transform: translate(-50%, -50%) scale(1.05);
           }
         }
@@ -148,32 +159,41 @@ function MatrixStream({ x, delay, speed, initialChars, opacity }: {
 function generateVariedBlockchainChars(blockData: any, txHashes: string[], addresses: string[], columnIndex: number): string[] {
   const chars: string[] = [];
   
-  // Each stream shows different transaction data - no block numbers to avoid repetition
+  // Helper function to filter out excessive zeros from hex data
+  const filterZeros = (str: string) => {
+    return str.split('').filter((char, index) => {
+      // Keep non-zero chars, and only some zeros for variety
+      return char !== '0' || Math.random() > 0.7; // Keep only 30% of zeros
+    }).join('');
+  };
   
-  // Primary content: Different transaction hash per column
+  // Primary content: Different transaction hash per column (filter zeros)
   const txIndex = columnIndex % Math.max(txHashes.length, 1);
   if (txHashes[txIndex]) {
     const hash = txHashes[txIndex];
-    // Use different parts of the hash for variety
-    const startPos = (columnIndex * 3) % 50; // Rotate starting position
-    chars.push(...hash.slice(2 + startPos, 2 + startPos + 20).split(''));
+    const startPos = (columnIndex * 3) % 40;
+    const rawSlice = hash.slice(2 + startPos, 2 + startPos + 25);
+    const filteredSlice = filterZeros(rawSlice);
+    chars.push(...filteredSlice.split(''));
   }
   
-  // Secondary content: Different address per column
+  // Secondary content: Different address per column (filter zeros)
   const addrIndex = (columnIndex + 3) % Math.max(addresses.length, 1);
   if (addresses[addrIndex]) {
     const addr = addresses[addrIndex];
-    const startPos = (columnIndex * 2) % 30;
-    chars.push(...addr.slice(2 + startPos, 2 + startPos + 15).split(''));
+    const startPos = (columnIndex * 2) % 25;
+    const rawSlice = addr.slice(2 + startPos, 2 + startPos + 20);
+    const filteredSlice = filterZeros(rawSlice);
+    chars.push(...filteredSlice.split(''));
   }
   
-  // Tertiary content: Rotate through different blockchain elements
+  // Tertiary content: Use hex values directly instead of converting to decimal
   if (blockData) {
     const rotationData = [
-      blockData.hash.slice(20, 35), // Different part of block hash
-      parseInt(blockData.timestamp, 16).toString(),
-      parseInt(blockData.gasUsed, 16).toString(),
-      blockData.miner ? blockData.miner.slice(2, 15) : '',
+      filterZeros(blockData.hash.slice(15, 35)), // Hash slice with filtered zeros
+      blockData.timestamp.slice(2, 12), // Keep hex timestamp, avoid conversion
+      blockData.gasUsed.slice(2, 8), // Keep hex gas, avoid conversion  
+      blockData.miner ? filterZeros(blockData.miner.slice(10, 25)) : '',
     ];
     
     const dataIndex = columnIndex % rotationData.length;
@@ -181,19 +201,24 @@ function generateVariedBlockchainChars(blockData: any, txHashes: string[], addre
     chars.push(...selectedData.split(''));
   }
 
-  // Add more variety with different transaction hash slices
+  // Add more variety with different transaction hash slices (filtered)
   const secondaryTxIndex = (columnIndex + 7) % Math.max(txHashes.length, 1);
   if (txHashes[secondaryTxIndex]) {
-    chars.push(...txHashes[secondaryTxIndex].slice(35, 50).split(''));
+    const rawSlice = txHashes[secondaryTxIndex].slice(25, 45);
+    const filteredSlice = filterZeros(rawSlice);
+    chars.push(...filteredSlice.split(''));
   }
 
-  // Fill remainder with varied crypto symbols
+  // Fill remainder with much more varied crypto symbols (less zero-heavy)
   const cryptoSets = [
-    '0123456789ABCDEF',
-    'abcdefghijklmnop', 
+    'ABCDEF123456789', // Hex without leading zeros
+    'bcdefghijklmnpqr', // Letters without zeros
     'ETHBASEUSDCxWBTC',
     '{}[]()<>=+-*/',
-    'DEFILENDNFTGAME'
+    'DEFILENDNFTGAME',
+    '789ABCDEFabcdef', // More varied hex
+    'SOLMATICLINK',
+    'xyz123456789abc'
   ];
   const cryptoChars = cryptoSets[columnIndex % cryptoSets.length];
   
