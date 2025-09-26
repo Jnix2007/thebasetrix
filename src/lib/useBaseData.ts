@@ -16,7 +16,7 @@ export function useBaseData() {
   const [transactionHashes, setTransactionHashes] = useState<string[]>([]);
   const [recentAddresses, setRecentAddresses] = useState<string[]>([]);
   const [isConnected, setIsConnected] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     console.log('📡 Beginning to fetch Base chain data...');
