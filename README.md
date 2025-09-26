@@ -4,7 +4,9 @@
 
 *"initializing with blockchain data... the basetrix has you..."*
 
-a matrix-style visualization of real-time base blockchain activity. watch the digital rain of actual transactions, blocks, and addresses flowing down your screen.
+The basetrix is a matrix-style visualization of realtime Base chain activity
+
+watch the digital rain of actual transactions, blocks, and addresses flowing down your screen
 
 ## what it does
 
@@ -29,13 +31,13 @@ open http://localhost:3000 and watch the base blockchain matrix unfold.
 
 ## how it works
 
-the app connects to base sepolia's flashblocks-aware rpc endpoint to pull real blockchain data every 10 seconds. this data gets transformed into the falling character streams you see on screen.
+the app connects to base sepolia's flashblocks-aware rpc endpoint to pull real blockchain data every 10 seconds. this data gets transformed into the falling character streams you see on screen
 
-flashblocks enable ultra-fast 200ms preconfirmations on base. learn more in the [base flashblocks documentation](https://docs.base.org/base-chain/flashblocks/apps).
+flashblocks enable ultra-fast 200ms preconfirmations on base! learn more in the [base flashblocks documentation](https://docs.base.org/base-chain/flashblocks/apps)
 
-when the api is unavailable, it falls back to realistic mock data so the visual effect never breaks.
+when the api is unavailable, it falls back to realistic mock data so the visual effect never breaks
 
-the animation uses pure css for smooth performance - no javascript interference once the streams are generated.
+the animation uses pure css for smooth performance - no js interference once the streams are generated
 
 ## technical notes
 
@@ -47,4 +49,4 @@ the falling speed is calibrated for a meditative 6-10 second full-screen travers
 
 inspired by the iconic matrix digital rain, this visualization makes the normally invisible activity of blockchain transactions visible and beautiful.
 
-the base blockchain processes thousands of transactions daily - this lets you see that activity as a living, breathing digital ecosystem.
+this lets you see Base chain activity as a living, breathing global economy
