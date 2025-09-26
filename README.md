@@ -50,3 +50,7 @@ the falling speed is calibrated for a meditative 6-10 second full-screen travers
 inspired by the iconic matrix digital rain, this visualization makes the normally invisible activity of blockchain transactions visible and beautiful.
 
 this lets you see Base chain activity as a living, breathing global economy
+
+---
+
+![BaseTrix Meme](basetrix-meme.jpg)
