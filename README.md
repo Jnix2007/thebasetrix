@@ -1,5 +1,7 @@
 # the basetrix
 
+![The BaseTrix Screenshot](public/screenshot.png)
+
 *"initializing with blockchain data... the basetrix has you..."*
 
 a matrix-style visualization of real-time base blockchain activity. watch the digital rain of actual transactions, blocks, and addresses flowing down your screen.
@@ -28,6 +30,8 @@ open http://localhost:3000 and watch the base blockchain matrix unfold.
 ## how it works
 
 the app connects to base sepolia's flashblocks-aware rpc endpoint to pull real blockchain data every 10 seconds. this data gets transformed into the falling character streams you see on screen.
+
+flashblocks enable ultra-fast 200ms preconfirmations on base. learn more in the [base flashblocks documentation](https://docs.base.org/base-chain/flashblocks/apps).
 
 when the api is unavailable, it falls back to realistic mock data so the visual effect never breaks.
 
