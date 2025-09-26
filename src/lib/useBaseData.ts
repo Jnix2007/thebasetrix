@@ -23,8 +23,8 @@ export function useBaseData() {
 
     const fetchFlashblockData = async () => {
       try {
-        // Use Base Sepolia Flashblocks endpoint for 200ms updates
-        const response = await fetch('https://sepolia-preconf.base.org', {
+        // Use Base Mainnet Flashblocks endpoint for 200ms updates
+        const response = await fetch('https://mainnet-preconf.base.org', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

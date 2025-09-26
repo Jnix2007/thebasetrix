@@ -4,13 +4,13 @@
 
 *"initializing with blockchain data... the basetrix has you..."*
 
-The basetrix is a matrix-style visualization of realtime Base chain activity
+The Basetrix is a visualization of realtime Base chain activity using a Flashblocks-aware Base Node RPC endpoint.
 
-watch the digital rain of actual transactions, blocks, and addresses flowing down your screen
+Watch the digital rain of actual transactions, blocks, and addresses flowing down your screen. Be still, and know that we're all gonna make it. Base is for everyone.
 
 ## what it does
 
-this creates a calming matrix rain effect where each falling character represents real base blockchain activity. the streams show live transaction hashes, wallet addresses, block data, and gas usage from base sepolia.
+Each falling character represents real Base chain activity. The streams show live transaction hashes, wallet addresses, block data, and gas usage from base mainnet.
 
 each column displays different types of blockchain data:
 - transaction hashes from live base transactions
@@ -31,7 +31,7 @@ open http://localhost:3000 and watch the base blockchain matrix unfold.
 
 ## how it works
 
-the app connects to base sepolia's flashblocks-aware rpc endpoint to pull real blockchain data every 10 seconds. this data gets transformed into the falling character streams you see on screen
+the app connects to base mainnet's flashblocks-aware rpc endpoint to pull real blockchain data every 10 seconds. this data gets transformed into the falling character streams you see on screen
 
 flashblocks enable ultra-fast 200ms preconfirmations on base! learn more in the [base flashblocks documentation](https://docs.base.org/base-chain/flashblocks/apps)
 
